@@ -3,203 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblical Discernment System (BDS)</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>📝 To-Do List App</title>
+    <link rel="stylesheet" href="todo-styles.css">
 </head>
 <body>
     <div class="container">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="nav-content">
-                <div class="logo">🛡️✝️ BDS</div>
-                <ul class="nav-links">
-                    <li><a href="#home" onclick="showSection('home')">Home</a></li>
-                    <li><a href="#assessment" onclick="showSection('assessment')">Assess</a></li>
-                    <li><a href="#guide" onclick="showSection('guide')">Guide</a></li>
-                    <li><a href="#about" onclick="showSection('about')">About</a></li>
-                </ul>
-            </div>
-        </nav>
+        <header>
+            <h1>📝 My To-Do List</h1>
+            <p class="subtitle">Stay organized and productive</p>
+        </header>
 
-        <!-- HOME SECTION -->
-        <section id="home" class="section active">
-            <div class="hero">
-                <h1>Biblical Discernment System</h1>
-                <p class="subtitle">Learn to recognize truth, avoid deception, and stay rooted in Christ.</p>
-                <button class="btn btn-primary" onclick="showSection('assessment')">Start Assessment</button>
-            </div>
-
-            <div class="home-content">
-                <div class="card-grid">
-                    <div class="card">
-                        <h3>🔍 BDX Quick Check</h3>
-                        <p>Fast verdict on whether a teaching is biblical, mixed, distorted, or anti-Gospel.</p>
-                    </div>
-                    <div class="card">
-                        <h3>📊 BDT Deep Analysis</h3>
-                        <p>16-category theological evaluation for thorough understanding.</p>
-                    </div>
-                    <div class="card">
-                        <h3>✝️ Scripture-Based</h3>
-                        <p>Every assessment rooted in Scripture, Christ, and the Gospel.</p>
-                    </div>
-                    <div class="card">
-                        <h3>💡 Easy to Use</h3>
-                        <p>No theology degree required. Simple, clear guidance for every believer.</p>
-                    </div>
+        <main>
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="todoInput" 
+                        placeholder="Add a new task..." 
+                        class="todo-input"
+                    >
+                    <button id="addBtn" class="add-btn">Add Task</button>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
                 </div>
             </div>
-        </section>
 
-        <!-- ASSESSMENT SECTION -->
-        <section id="assessment" class="section">
-            <h2>BDS Assessment Tool</h2>
-            <div class="assessment-container">
-                <!-- Input Stage -->
-                <div id="inputStage" class="stage active">
-                    <h3>What teaching would you like to evaluate?</h3>
-                    <p class="subtitle">Describe it, paste a link, or tell us about a video/sermon.</p>
-
-                    <div class="input-options">
-                        <div class="input-method">
-                            <label>📝 Teaching Description</label>
-                            <textarea id="teachingText" placeholder="Describe the teaching, claim, or idea you want to evaluate..." rows="5"></textarea>
-                        </div>
-
-                        <div class="input-divider">— OR —</div>
-
-                        <div class="input-method">
-                            <label>🔗 Link or URL</label>
-                            <input type="url" id="teachingUrl" placeholder="Paste a URL to a sermon, article, or video...">
-                        </div>
-
-                        <div class="input-divider">— OR —</div>
-
-                        <div class="input-method">
-                            <label>🎥 Video Description</label>
-                            <textarea id="videoDescription" placeholder="Describe the video or embed link..." rows="3"></textarea>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary" onclick="startAssessment()">Evaluate This Teaching</button>
+            <!-- Stats Section -->
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-label">Total:</span>
+                    <span class="stat-value" id="totalCount">0</span>
                 </div>
-
-                <!-- Questions Stage -->
-                <div id="questionsStage" class="stage">
-                    <div id="questionsContainer"></div>
-                    <div class="button-group">
-                        <button class="btn btn-secondary" onclick="resetAssessment()">Start Over</button>
-                        <button class="btn btn-primary" onclick="calculateResult()">Get Assessment</button>
-                    </div>
+                <div class="stat">
+                    <span class="stat-label">Active:</span>
+                    <span class="stat-value" id="activeCount">0</span>
                 </div>
-
-                <!-- Results Stage -->
-                <div id="resultsStage" class="stage">
-                    <div id="resultsContainer"></div>
-                    <div class="button-group">
-                        <button class="btn btn-secondary" onclick="resetAssessment()">New Assessment</button>
-                    </div>
+                <div class="stat">
+                    <span class="stat-label">Completed:</span>
+                    <span class="stat-value" id="completedCount">0</span>
                 </div>
             </div>
-        </section>
 
-        <!-- GUIDE SECTION -->
-        <section id="guide" class="section">
-            <h2>How BDS Works</h2>
-            <div class="guide-content">
-                <div class="guide-section">
-                    <h3>The Two Tools</h3>
-                    <p><strong>BDX (Quick Check):</strong> Fast verdict on any teaching—is it biblical, mixed, distorted, or dangerous?</p>
-                    <p><strong>BDT (Deep Check):</strong> Thorough 16-category theological analysis for important decisions.</p>
-                </div>
-
-                <div class="guide-section">
-                    <h3>The 8 BDX Verdicts</h3>
-                    <ul class="verdict-list">
-                        <li><strong>🟩 Biblical:</strong> Fully consistent with Scripture and the gospel.</li>
-                        <li><strong>🟩 Biblical but Incomplete:</strong> True but missing essential context or qualifiers.</li>
-                        <li><strong>🟨 Mixed:</strong> Contains both truth and error.</li>
-                        <li><strong>🟨 Distorted:</strong> Uses biblical language but reshapes the meaning.</li>
-                        <li><strong>🟨 Speculative:</strong> Goes beyond Scripture with imagination or conjecture.</li>
-                        <li><strong>🔴 Unbiblical:</strong> Directly contradicts Scripture.</li>
-                        <li><strong>🔴 Deceptive:</strong> Appears biblical but designed to mislead.</li>
-                        <li><strong>🔴 Anti-Gospel:</strong> Attacks or undermines the gospel itself.</li>
-                    </ul>
-                </div>
-
-                <div class="guide-section">
-                    <h3>The 16 BDT Categories</h3>
-                    <ol class="categories-list">
-                        <li><strong>Theology Proper:</strong> Claims about God's nature and attributes</li>
-                        <li><strong>Christology:</strong> Claims about Christ's person and work</li>
-                        <li><strong>Pneumatology:</strong> Claims about the Holy Spirit</li>
-                        <li><strong>Trinity:</strong> Claims about Father, Son, and Spirit</li>
-                        <li><strong>Bibliology:</strong> Claims about Scripture</li>
-                        <li><strong>Anthropology:</strong> Claims about human nature and the image of God</li>
-                        <li><strong>Hamartiology:</strong> Claims about sin</li>
-                        <li><strong>Soteriology:</strong> Claims about salvation</li>
-                        <li><strong>Ecclesiology:</strong> Claims about the church</li>
-                        <li><strong>Eschatology:</strong> Claims about last things</li>
-                        <li><strong>Angelology:</strong> Claims about angels and demons</li>
-                        <li><strong>Covenant & Redemptive History:</strong> Claims about God's plan</li>
-                        <li><strong>Christian Identity:</strong> Claims about who believers are in Christ</li>
-                        <li><strong>Christian Ethics:</strong> Claims about moral living</li>
-                        <li><strong>Christian Practice:</strong> Claims about spiritual disciplines and worship</li>
-                        <li><strong>Cultural & Philosophical:</strong> Claims about worldview and ideology</li>
-                    </ol>
-                </div>
-
-                <div class="guide-section">
-                    <h3>What BDS Is NOT</h3>
-                    <ul>
-                        <li>Not a way to judge people</li>
-                        <li>Not a way to feel superior</li>
-                        <li>Not a replacement for prayer, Bible study, or church community</li>
-                        <li>Not a tool to win arguments or attack other Christians</li>
-                    </ul>
-                </div>
-
-                <div class="guide-section">
-                    <h3>What BDS IS</h3>
-                    <ul>
-                        <li>A way to stay safe in your faith</li>
-                        <li>A way to grow in wisdom and discernment</li>
-                        <li>A way to protect your faith and the gospel</li>
-                        <li>A way to stay centered on Jesus and Scripture</li>
-                    </ul>
+            <!-- Tasks List -->
+            <div class="tasks-container">
+                <ul id="todoList" class="todo-list"></ul>
+                <div id="emptyState" class="empty-state">
+                    <p>✨ No tasks yet. Add one to get started!</p>
                 </div>
             </div>
-        </section>
 
-        <!-- ABOUT SECTION -->
-        <section id="about" class="section">
-            <h2>About BDS</h2>
-            <div class="about-content">
-                <h3>Welcome to the Biblical Discernment System</h3>
-                <p>If you're new to following Jesus, you're going to hear a lot of ideas: sermons, podcasts, TikTok "Christian" advice, YouTube prophets, friends' opinions, cultural messages, and Christian clichés.</p>
-                <p>Some of it is helpful. Some of it is confusing. Some of it is wrong. Some of it sounds right but isn't.</p>
-                <p><strong>BDS exists to help you tell the difference—not by guessing, not by feelings, not by "what sounds good," but by Scripture, Jesus, and the Gospel.</strong></p>
-
-                <h3>The Heart Behind BDS</h3>
-                <p>BDS is built on love, humility, wisdom, truth, grace, and Christlikeness. Discernment is not about being harsh or suspicious. It's about being healthy, wise, safe, and rooted in Christ.</p>
-
-                <h3>For New Believers</h3>
-                <p>You don't have to know everything. You don't have to be a Bible scholar. You don't have to memorize the whole system. You just need to know:</p>
-                <ul>
-                    <li><strong>Jesus is the center.</strong></li>
-                    <li><strong>Scripture is the standard.</strong></li>
-                    <li><strong>The gospel is the filter.</strong></li>
-                    <li><strong>And BDS helps you stay on track.</strong></li>
-                </ul>
-                <p>You're not alone. You're growing. And you're safe in Christ.</p>
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="clearCompletedBtn" class="action-btn secondary">Clear Completed</button>
+                <button id="clearAllBtn" class="action-btn danger">Clear All</button>
             </div>
-        </section>
+        </main>
+
+        <footer>
+            <p>💾 Your tasks are automatically saved</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Biblical Discernment System. Built for the church. Free to use.</p>
-    </footer>
-
-    <script src="app.js"></script>
+    <script src="todo-app.js"></script>
 </body>
 </html>
